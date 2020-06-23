@@ -9,10 +9,13 @@ api = Api(app)
 
 class AnimeINFO(Resource):
 	def get(self, query):
-		return jsonify(anilist.search_anilist(query))
+		return jsonify(anilist.search_anilist(query, type='ANIME'))
 
+class MangaINFO(Resource):
+	def get(self, query):
+		return jsonify(anilist.search_anilist(query, type='MANGA'))
 
-
-api.add_resource(AnimeINFO, '/anisearch/<query>')
+api.add_resource(AnimeINFO, '/animeinfo/<query>')
+api.add_resource(MangaINFO, '/mangainfo/<query>')
 if __name__ == '__main__':
 	app.run(port=80)
