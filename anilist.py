@@ -41,6 +41,7 @@ def search_anilist(search, type, max_results=10):
   response = requests.post(url, json={'query': query, 'variables': variables})
   io = StringIO(response.text)
   results = json.load(io)
+  remove_list = ['/', '\\','\r', '\n','<i>', '"', '<br>', '\u2014']
   try:
     result_list = results['data']['Page']['media']
     final_result = []
@@ -50,12 +51,14 @@ def search_anilist(search, type, max_results=10):
       status = anime['status']
       thumbnail = anime['coverImage']['extraLarge']
       episodes = anime['episodes']
-      description = anime['description'].replace('<br>', '').replace('\\', '').replace('/', '').replace('"', '').replace('<i>', '').replace('\n', '')
+      description = anime['description']
+      for a in remove_list:
+        description = description.replace(a, '')
       if type == 'ANIME':
         link = f'https://anilist.co/anime/{ani_id}'
       if type == 'MANGA':
         link = f'https://anilist.co/manga/{ani_id}'
-      entry = {"title": title, "id": ani_id, "link": link, "episodes": episodes, "status":status, "description": description, "picture": thumbnail}
+      entry = {"title": title, "anilist_id": ani_id, "link": link, "episodes": episodes, "status":status, "description": description, "picture": thumbnail}
       final_result.append(entry)
   except:
     final_result = results['errors'][0]['message']
