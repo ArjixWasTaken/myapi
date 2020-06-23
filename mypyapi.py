@@ -1,0 +1,18 @@
+from flask import Flask, g, jsonify
+from flask_restful import Resource, Api
+import requests, json, anilist
+from flask import Response, render_template
+
+
+app = Flask(__name__)
+api = Api(app)
+
+class AnimeINFO(Resource):
+	def get(self, query):
+		return anilist.search_anilist(query)
+
+
+
+api.add_resource(AnimeINFO, '/anisearch/<query>')
+if __name__ == '__main__':
+	app.run(host='192.168.2.12', port=80, debug=True)
