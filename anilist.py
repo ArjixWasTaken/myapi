@@ -2,7 +2,7 @@ import requests
 from io import StringIO
 import json
 from bs4 import BeautifulSoup
-def search_anilist(search, max_results=10):
+def search_anilist(search, type, max_results=10):
   query = """
   query ($id: Int, $page: Int, $search: String, $type: MediaType) {
       Page (page: $page, perPage: 10) {
@@ -38,7 +38,7 @@ def search_anilist(search, max_results=10):
       'search': search,
       'page': 1,
       'perPage': max_results,
-      'type': 'ANIME'
+      'type': type
   }
   url = 'https://graphql.anilist.co'
 
@@ -54,8 +54,11 @@ def search_anilist(search, max_results=10):
       status = anime['status']
       thumbnail = anime['coverImage']['medium']
       episodes = anime['episodes']
-      description = anime['description']
-      link = f'https://anilist.co/anime/{ani_id}'
+      description = anime['description'].replace('<br>', '').replace('\\', '').replace('/', '').replace('"', '').replace('<i>', '').replace('\n', '')
+      if type == 'ANIME':
+        link = f'https://anilist.co/anime/{ani_id}'
+      if type == 'MANGA':
+        link = f'https://anilist.co/manga/{ani_id}'
       entry = {"title": title, "anilist_id": ani_id, "link": link, "episodes": episodes, "status":status, "description": description, "picture": thumbnail}
       final_result.append(entry)
   except:
