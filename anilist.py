@@ -15,20 +15,16 @@ def search_anilist(search, type, max_results=10):
                   romaji
               }
               coverImage {
-                  medium
+                  extraLarge
               }
               bannerImage
               averageScore
-              meanScore
               status
               episodes
               chapters
               externalLinks {
                   url
                   site
-              }
-              nextAiringEpisode {
-                  timeUntilAiring
               }
           }
       }
@@ -52,14 +48,14 @@ def search_anilist(search, type, max_results=10):
       title = anime['title']['romaji']
       ani_id = anime['id']
       status = anime['status']
-      thumbnail = anime['coverImage']['medium']
+      thumbnail = anime['coverImage']['extraLarge']
       episodes = anime['episodes']
       description = anime['description'].replace('<br>', '').replace('\\', '').replace('/', '').replace('"', '').replace('<i>', '').replace('\n', '')
       if type == 'ANIME':
         link = f'https://anilist.co/anime/{ani_id}'
       if type == 'MANGA':
         link = f'https://anilist.co/manga/{ani_id}'
-      entry = {"title": title, "anilist_id": ani_id, "link": link, "episodes": episodes, "status":status, "description": description, "picture": thumbnail}
+      entry = {"title": title, "id": ani_id, "link": link, "episodes": episodes, "status":status, "description": description, "picture": thumbnail}
       final_result.append(entry)
   except:
     final_result = results['errors'][0]['message']
