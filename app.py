@@ -1,4 +1,4 @@
-from flask import Flask, g, jsonify
+from flask import Flask, jsonify
 from flask_restful import Resource, Api
 import requests, json, anilist
 from flask import Response, render_template
@@ -9,7 +9,7 @@ api = Api(app)
 
 class AnimeINFO(Resource):
 	def get(self, query):
-		return anilist.search_anilist(query)
+		return jsonify(anilist.search_anilist(query))
 
 
 
