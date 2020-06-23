@@ -47,7 +47,7 @@ def search_anilist(search, type, max_results=10):
     final_result = []
     for anime in result_list:
       title = anime['title']['romaji']
-      ani_id = anime['id']
+      ani_id = anime['idMal']
       status = anime['status']
       thumbnail = anime['coverImage']['extraLarge']
       episodes = anime['episodes']
@@ -56,7 +56,7 @@ def search_anilist(search, type, max_results=10):
         description = description.replace(a, '')
       if type == 'ANIME':
         link = f'https://anilist.co/anime/{ani_id}'
-      if type == 'MANGA':
+      elif type == 'MANGA':
         link = f'https://anilist.co/manga/{ani_id}'
       entry = {"title": title, "anilist_id": ani_id, "link": link, "episodes": episodes, "status":status, "description": description, "picture": thumbnail}
       final_result.append(entry)
