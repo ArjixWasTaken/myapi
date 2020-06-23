@@ -15,4 +15,4 @@ class AnimeINFO(Resource):
 
 api.add_resource(AnimeINFO, '/anisearch/<query>')
 if __name__ == '__main__':
-	app.run(host='192.168.2.12', port=80, debug=True)
+	app.run(port=80, debug=True)
