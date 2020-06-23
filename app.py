@@ -15,6 +15,25 @@ class MangaINFO(Resource):
 	def get(self, query):
 		return jsonify(anilist.search_anilist(query, type='MANGA'))
 
+class Home(Resource):
+	def get(self):
+		resources = {
+			"AnimeINFO": {
+				"parameter": '/animeinfo/<query>',
+				"example": '/animeinfo/overlord',
+				"help": 'performs a search using the provided query and returns up to 10 results fetched from AniList.'
+			}, 
+			"MangaINFO": {
+				"parameter": '/mangainfo/<query>',
+				"example": '/mangainfo/overlord',
+				"help": 'performs a search using the provided query and returns up to 10 results fetched from AniList.'
+			}
+		}
+		return resources
+
+
+
+api.add_resource(Home, '/')
 api.add_resource(AnimeINFO, '/animeinfo/<query>')
 api.add_resource(MangaINFO, '/mangainfo/<query>')
 if __name__ == '__main__':
