@@ -30,6 +30,11 @@ class Home(Resource):
 				"parameter": '/mangainfo/<query>',
 				"example": '/mangainfo/overlord',
 				"help": 'performs a search using the provided query and returns up to 10 results fetched from AniList.'
+			},
+			"Yify": {
+				"parameter": '/yify/<query>',
+				"example": "/yify/sonic the hedgehog",
+				"help": "Scrapes the website yts.mx and returns all the useful information."
 			}
 		}
 		return resources
