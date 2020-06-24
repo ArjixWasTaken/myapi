@@ -1,7 +1,6 @@
-import os, requests, json
+import requests, json
 from bs4 import BeautifulSoup
 
-query = 'end game fgfg'
 def get_html(url):
     return BeautifulSoup(requests.get(url).text, 'html.parser')
 
