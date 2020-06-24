@@ -16,7 +16,7 @@ class MangaINFO(Resource):
 
 class Yify(Resource):
 	def get(self, query):
-		return jsonify(yify.search_yify(query))
+		return yify.search_yify(query)
 
 class Home(Resource):
 	def get(self):
