@@ -10,8 +10,8 @@ def get_json(url):
 def search_yify(query):
     results_list = []
     url = f'https://yts.mx/ajax/search?query={query}'
-    response = get_json(url).json()
     try:
+        response = get_json(url).json()
         for movie in response['data']:
             html = get_html(movie['url'])
             _720p = html.find('div', id='modal-quality-720p')
