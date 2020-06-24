@@ -1,5 +1,6 @@
 import os, requests, json
 from bs4 import BeautifulSoup
+from waitress import serve
 
 def get_html(url):
     return BeautifulSoup(requests.get(url).text, 'html.parser')
