@@ -41,7 +41,7 @@ def search_anilist(search, type, max_results=10):
   response = requests.post(url, json={'query': query, 'variables': variables})
   io = StringIO(response.text)
   results = json.load(io)
-  remove_list = ['/', '\\','\r', '\n','<i>', '"', '<br>', '\u2014', '\u2019']
+  remove_list = ['/', '\\','\r', '\n','<i>', '"', '<br>', '\u2014', '\u2019', '\u201c', '\u201d']
   try:
     result_list = results['data']['Page']['media']
     final_result = []
