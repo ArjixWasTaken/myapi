@@ -1,1 +1,1 @@
-web: waitress-serve app:app
+web: gunicorn -w 5 app:app
