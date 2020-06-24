@@ -38,6 +38,6 @@ def search_yify(query):
             results_list.append(entry)
 
 
-    except KeyError:
+    except:
         results_list = [{'status': "error"}]
     return results_list
