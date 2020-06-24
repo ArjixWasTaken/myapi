@@ -1,7 +1,6 @@
 from flask import Flask, jsonify
 from flask_restful import Resource, Api
 import requests, json, anilist, yify
-from flask import Response, render_template
 
 
 app = Flask(__name__)
@@ -16,22 +15,22 @@ class MangaINFO(Resource):
 		return jsonify(anilist.search_anilist(query, type='MANGA'))
 class Yify(Resource):
 	def get(self, query):
-		return jsonify(yify.search_yify(query))
+		return yify.search_yify(query)
 class Home(Resource):
 	def get(self):
 		resources = {
 			"AnimeINFO": {
-				"parameter": '/animeinfo/<query>',
-				"example": '/animeinfo/overlord',
+				"parameter": "/animeinfo/<query>",
+				"example": "/animeinfo/overlord",
 				"help": 'Performs a search using the provided query and returns up to 10 results fetched from AniList.'
 			}, 
 			"MangaINFO": {
-				"parameter": '/mangainfo/<query>',
-				"example": '/mangainfo/overlord',
+				"parameter": "/mangainfo/<query>",
+				"example": "/mangainfo/overlord",
 				"help": 'Performs a search using the provided query and returns up to 10 results fetched from AniList.'
 			},
 			"Yify": {
-				"parameter": '/yify/<query>',
+				"parameter": "/yify/<query>",
 				"example": "/yify/sonic the hedgehog",
 				"help": "Scrapes the website yts.mx and returns all the useful information."
 			}
