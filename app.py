@@ -2,7 +2,6 @@ from flask import Flask, jsonify
 from flask_restful import Resource, Api
 import requests, json, anilist, yify
 from flask import Response, render_template
-from waitress import serve
 
 
 app = Flask(__name__)
@@ -48,4 +47,4 @@ api.add_resource(Yify, '/yify/<query>')
 api.add_resource(AnimeINFO, '/animeinfo/<query>')
 api.add_resource(MangaINFO, '/mangainfo/<query>')
 if __name__ == '__main__':
-	serve(host='https://arjixgamersapi.herokuapp.com/')
+	app.run(port=80)
