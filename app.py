@@ -46,4 +46,4 @@ api.add_resource(Yify, '/yify/<query>')
 api.add_resource(AnimeINFO, '/animeinfo/<query>')
 api.add_resource(MangaINFO, '/mangainfo/<query>')
 if __name__ == '__main__':
-	app.run(port=80)
+	app.run(host='0.0.0.0', port=80)
