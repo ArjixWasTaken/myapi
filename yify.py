@@ -39,6 +39,7 @@ def search_yify(query):
 
     except:
         url = f'https://yts.mx/ajax/search?query={query}'
-        return {"response": requests.get(url)}
+        fg = requests.get(url)
+        print(fg, fg.text, fg.json())
         results_list = [{'status': "error"}]
     return results_list
