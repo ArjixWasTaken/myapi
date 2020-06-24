@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 from flask_restful import Resource, Api
-import requests, json, anilist
+import requests, json, anilist, yify
 from flask import Response, render_template
 
 
@@ -14,7 +14,9 @@ class AnimeINFO(Resource):
 class MangaINFO(Resource):
 	def get(self, query):
 		return jsonify(anilist.search_anilist(query, type='MANGA'))
-
+class Yify(Resource):
+	def get(self, query):
+		return jsonify(yify.search_yify(query))
 class Home(Resource):
 	def get(self):
 		resources = {
@@ -34,6 +36,7 @@ class Home(Resource):
 
 
 api.add_resource(Home, '/')
+api.add_resource(Yify, '/yify/<query>')
 api.add_resource(AnimeINFO, '/animeinfo/<query>')
 api.add_resource(MangaINFO, '/mangainfo/<query>')
 if __name__ == '__main__':
