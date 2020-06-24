@@ -5,12 +5,12 @@ def get_html(url):
     return BeautifulSoup(requests.get(url).text, 'html.parser')
 
 def get_json(url):
-    return requests.get(url).json()
+    return requests.get(url)
 
 def search_yify(query):
     results_list = []
     url = f'https://yts.mx/ajax/search?query={query}'
-    response = get_json(url)
+    response = get_json(url).json()
     try:
         for movie in response['data']:
             html = get_html(movie['url'])
