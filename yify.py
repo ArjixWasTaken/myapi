@@ -1,4 +1,4 @@
-import requests, json
+import os, requests, json
 from bs4 import BeautifulSoup
 
 def get_html(url):
@@ -10,8 +10,8 @@ def get_json(url):
 def search_yify(query):
     results_list = []
     url = f'https://yts.mx/ajax/search?query={query}'
+    response = get_json(url).json()
     try:
-        response = get_json(url).json()
         for movie in response['data']:
             html = get_html(movie['url'])
             _720p = html.find('div', id='modal-quality-720p')
@@ -23,7 +23,8 @@ def search_yify(query):
             entry = {
                 "title": movie['title'], 
                 "year": movie['year'], 
-                "link": movie['url'], 
+                "link": movie['url'],
+                "image": html.find('img', class_='img-responsive')['src'],
                 "qualities":{
                     "720p": {
                         "size": _720p_size,
@@ -37,9 +38,6 @@ def search_yify(query):
             results_list.append(entry)
 
 
-    except:
-        url = f'https://yts.mx/ajax/search?query={query}'
-        fg = requests.get(url)
-        print(fg, fg.text, fg.json())
+    except KeyError:
         results_list = [{'status': "error"}]
     return results_list
