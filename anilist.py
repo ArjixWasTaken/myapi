@@ -62,5 +62,5 @@ def search_anilist(search, type, max_results=10):
       final_result.append(entry)
   except:
     final_result = results['errors'][0]['message']
-    raise Exception(final_result)
+    return {"error": final_result}
   return final_result
