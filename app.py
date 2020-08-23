@@ -41,4 +41,4 @@ api.add_resource(Home, '/')
 api.add_resource(AnimeINFO, '/animeinfo/<query>')
 api.add_resource(MangaINFO, '/mangainfo/<query>')
 if __name__ == '__main__':
-	app.run(port=80)
+	app.run(port=6969)
